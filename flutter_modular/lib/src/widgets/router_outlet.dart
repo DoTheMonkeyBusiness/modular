@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+
 import '../../flutter_modular.dart';
 import 'widget_module.dart';
 
@@ -7,13 +8,15 @@ class RouterOutlet extends StatefulWidget {
   final String initialRoute;
   final Key navigatorKey;
   final bool keepAlive;
+  final List<NavigatorObserver> observers;
 
   RouterOutlet(
       {Key key,
       @required this.module,
       this.navigatorKey,
       this.initialRoute = Modular.initialRoute,
-      this.keepAlive = true})
+      this.keepAlive = true,
+      this.observers = const []})
       : super(key: key) {
     module.paths.add(runtimeType.toString());
   }
@@ -43,6 +46,7 @@ class _RouterOutletState extends State<RouterOutlet>
         module: widget.module,
         child: Navigator(
           key: _key,
+          observers: widget.observers,
           initialRoute: widget.initialRoute,
           onGenerateRoute: (setting) {
             return Modular.generateRoute(setting, widget.module);
