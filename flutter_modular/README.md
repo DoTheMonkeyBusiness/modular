@@ -128,7 +128,7 @@ class AppModule extends MainModule {
 
   // Provide all the routes for your module
   @override
-  List<Router> get routers => [];
+  List<ModularRouter> get routers => [];
 
   // Provide the root widget associated with your module
   // In this case, it's the widget you created in the first step
@@ -165,9 +165,9 @@ class AppModule extends MainModule {
 
   // Provide all the routes for your module
   @override
-  List<Router> get routers => [
-      Router('/', child: (_, __) => HomePage()),
-      Router('/login', child: (_, __) => LoginPage()),
+  List<ModularRouter> get routers => [
+      ModularRouter('/', child: (_, __) => HomePage()),
+      ModularRouter('/login', child: (_, __) => LoginPage()),
   ];
 
   // Provide the root widget associated with your module
@@ -205,7 +205,7 @@ Modular.link.pushNamed('/detail/:id');
 
 ## Dynamic routes
 
-You can use the dynamic routing system to provide parameters to your `Router`:
+You can use the dynamic routing system to provide parameters to your `ModularRouter`:
 
 ```dart
 // Use :parameter_name syntax to provide a parameter in your route.
@@ -213,8 +213,8 @@ You can use the dynamic routing system to provide parameters to your `Router`:
 // using square brackets notation (['parameter_name']).
 
 @override
-List<Router> get routers => [
-  Router(
+List<ModularRouter> get routers => [
+  ModularRouter(
     '/product/:id',
     child: (_, args) => Product(id: args.params['id']),
   ),
@@ -238,8 +238,8 @@ And it will be available in the `args.data` property instead of `args.params`:
 
 ```dart
 @override
-List<Router> get routers => [
-  Router(
+List<ModularRouter> get routers => [
+  ModularRouter(
     '/product',
     child: (_, args) => Product(model: args.data),
   ),
@@ -271,9 +271,9 @@ To use your `RouteGuard` in a route, pass it to the `guards` parameter:
 
 ```dart
 @override
-List<Router> get routers => [
-  Router('/', module: HomeModule()),
-  Router(
+List<ModularRouter> get routers => [
+  ModularRouter('/', module: HomeModule()),
+  ModularRouter(
     '/admin',
     module: AdminModule(),
     guards: [MyGuard()],
@@ -286,10 +286,10 @@ If placed on a module route, `RouterGuard` will be global to that route.
 
 ## Route transition animation
 
-You can choose which type of animation you want to be used on your pages transition by setting the `Router`'s `transition` parameter, providing a `TransitionType`.
+You can choose which type of animation you want to be used on your pages transition by setting the `ModularRouter`'s `transition` parameter, providing a `TransitionType`.
 
 ```dart
-Router('/product',
+ModularRouter('/product',
   module: AdminModule(),
   transition: TransitionType.fadeIn,
 ), //use for change transition
@@ -299,10 +299,10 @@ If you use transition in a module, all routes in that module will inherit this t
 
 ### Custom transition animation route
 
-You can also use a custom transition animation by setting the Router parameters `transition` and `customTransition` with `TransitionType.custom` and your `CustomTransition`, respectively:
+You can also use a custom transition animation by setting the ModularRouter parameters `transition` and `customTransition` with `TransitionType.custom` and your `CustomTransition`, respectively:
 
 ```dart
-Router('/product',
+ModularRouter('/product',
   module: AdminModule(),
   transition: TransitionType.custom,
   customTransition: myCustomTransition,
@@ -351,28 +351,28 @@ CustomTransition get myCustomTransition => CustomTransition(
 You can group routes that contains one or more common properties. Properties like `guards`, `transition` and `customTransition` can be provided both for single routes and groups of routes:
 
 ```dart
-List<Router> get routers => [
-  Router('/', module: HomeModule()),
-  Router.group(
+List<ModularRouter> get routers => [
+  ModularRouter('/', module: HomeModule()),
+  ModularRouter.group(
     guards: [MyGuard()],
     routes: [
-      Router("/admin", module: AdminModule()),
-      Router("/profile", module: ProfileModule()),
+      ModularRouter("/admin", module: AdminModule()),
+      ModularRouter("/profile", module: ProfileModule()),
     ],
   ),
 );
 ```
 
-## Router generic types
+## ModularRouter generic types
 
 You can return values from navigation, just like `.pop`.
-To achieve this, pass the type you expect to return as type parameter to `Router`:
+To achieve this, pass the type you expect to return as type parameter to `ModularRouter`:
 
 ```dart
 @override
-List<Router> get routers => [
+List<ModularRouter> get routers => [
   // This router expects to receive a `String` when popped.
-  Router<String>('/event', child: (_, __) => EventPage()),
+  ModularRouter<String>('/event', child: (_, __) => EventPage()),
 ]
 ```
 
@@ -413,9 +413,9 @@ class AppModule extends MainModule {
 
   // Provide all the routes for your module
   @override
-  List<Router> get routers => [
-    Router('/', child: (_, args) => HomePage()),
-    Router('/login', child: (_, args) => LoginPage()),
+  List<ModularRouter> get routers => [
+    ModularRouter('/', child: (_, args) => HomePage()),
+    ModularRouter('/login', child: (_, args) => LoginPage()),
   ];
 
   // Provide the root widget associated with your module
@@ -557,23 +557,23 @@ class HomeModule extends ChildModule {
   ];
 
   @override
-  List<Router> get routers => [
-    Router('/', child: (_, args) => HomeWidget()),
-    Router('/list', child: (_, args) => ListWidget()),
+  List<ModularRouter> get routers => [
+    ModularRouter('/', child: (_, args) => HomeWidget()),
+    ModularRouter('/list', child: (_, args) => ListWidget()),
   ];
 
   static Inject get to => Inject<HomeModule>.of();
 }
 ```
 
-You may then pass the submodule to a `Router` in your main module through the `module` parameter:
+You may then pass the submodule to a `ModularRouter` in your main module through the `module` parameter:
 
 ```dart
 class AppModule extends MainModule {
 
   @override
-  List<Router> get routers => [
-    Router('/home', module: HomeModule()),
+  List<ModularRouter> get routers => [
+    ModularRouter('/home', module: HomeModule()),
   ];
 }
 ```
