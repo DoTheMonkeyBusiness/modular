@@ -126,9 +126,9 @@ NOTE: Navigation is only Navigator.of (context) and only uses the module's liter
 * Added router generic type
 ```dart
  @override
-  List<Router> get routers => [
+  List<ModularRouter> get routers => [
     //type router with return type
-    Router<String>('/event', child: (_, args) => EventPage()),
+    ModularRouter<String>('/event', child: (_, args) => EventPage()),
   ]
 ```
 Now you can type your pushNamed and pop
@@ -198,7 +198,7 @@ Now you can type your pushNamed and pop
 * Added **Modular.to** and replace Navigator.of(context)
 * Added **Modular.get** and replace AppModule.to.get
 * Added flag "singleton" in Bind injection
-* Fix Router Guard
+* Fix ModularRouter Guard
 
 ## [0.1.8] - 08 Jan 2020
 
@@ -232,7 +232,7 @@ Now you can type your pushNamed and pop
 
 ## [0.0.7] - 10 Dec 2019
 
-* Dynamic Router
+* Dynamic ModularRouter
 * Added Doc Translation
 * Change BrowserModule to MainModule
 * Change CommonModule to ChildModule

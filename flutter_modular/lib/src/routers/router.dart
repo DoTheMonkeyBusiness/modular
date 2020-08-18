@@ -15,7 +15,7 @@ _debugPrintModular(String text) {
   }
 }
 
-class Router<T> {
+class ModularRouter<T> {
   ///
   /// Paramenter name: [routerName]
   ///
@@ -89,9 +89,9 @@ class Router<T> {
   ///To use your RouteGuard in a route, pass it to the guards parameter:
   ///
   ///@override
-  ///List<Router> get routers => [
-  ///  Router('/', module: HomeModule()),
-  ///  Router(
+  ///List<ModularRouter> get routers => [
+  ///  ModularRouter('/', module: HomeModule()),
+  ///  ModularRouter(
   ///    '/admin',
   ///    module: AdminModule(),
   ///    guards: [MyGuard()],
@@ -173,7 +173,7 @@ class Router<T> {
   final RouteBuilder<T> routeGenerator;
   final String modulePath;
 
-  Router(
+  ModularRouter(
     this.routerName, {
     this.module,
     this.child,
@@ -218,7 +218,7 @@ class Router<T> {
     TransitionType.leftToRightWithFade: leftToRightWithFade,
   };
 
-  Router<T> copyWith(
+  ModularRouter<T> copyWith(
       {Widget Function(BuildContext context, ModularArguments args) child,
       String routerName,
       ChildModule module,
@@ -228,7 +228,7 @@ class Router<T> {
       RouteBuilder routeGenerator,
       String modulePath,
       CustomTransition customTransition}) {
-    return Router<T>(
+    return ModularRouter<T>(
       routerName ?? this.routerName,
       child: child ?? this.child,
       module: module ?? this.module,
@@ -241,8 +241,8 @@ class Router<T> {
     );
   }
 
-  static List<Router> group({
-    @required List<Router> routes,
+  static List<ModularRouter> group({
+    @required List<ModularRouter> routes,
     List<RouteGuard> guards,
     TransitionType transition,
     CustomTransition customTransition,
