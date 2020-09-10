@@ -21,8 +21,11 @@ class Tab1Module extends ChildModule {
   @override
   List<ModularRouter> get routers => [
         ModularRouter(Modular.initialRoute, child: (_, args) => Tab1Page()),
-        ModularRouter("/page1", child: (_, args) => Page1Page(), transition: TransitionType.rotate),
-        ModularRouter("/page2", child: (_, args) => Page2Page(), transition: TransitionType.leftToRight),
+        ModularRouter("/page1",
+            child: (_, args) => Page1Page(), transition: TransitionType.rotate),
+        ModularRouter("/page2",
+            child: (_, args) => Page2Page(),
+            transition: TransitionType.leftToRight),
         ModularRouter(
           '/page3',
           child: (_, args) => Page3Page(),
@@ -57,6 +60,8 @@ class Tab1Module extends ChildModule {
             },
           ),
         ),
-        ModularRouter("/page4", child: (_, args) => Page4Page(), transition: TransitionType.rightToLeft),
+        ModularRouter("/page4",
+            child: (_, args) => Page4Page(),
+            transition: TransitionType.rightToLeft),
       ];
 }
