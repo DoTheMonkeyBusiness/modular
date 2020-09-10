@@ -32,8 +32,10 @@ class HomeModule extends ChildModule {
         ),
         ModularRouter("/list/:id/:id2", child: (_, args) => HomeWidget()),
         ModularRouter("/product", module: ProductModule()),
-        ModularRouter("/arguments", child: (_, args) => ArgumentsPage(id: args.data)),
-        ModularRouter("/modularArguments", child: (_, args) => ModularArgumentsPage()),
+        ModularRouter("/arguments",
+            child: (_, args) => ArgumentsPage(id: args.data)),
+        ModularRouter("/modularArguments",
+            child: (_, args) => ModularArgumentsPage()),
       ];
 }
 

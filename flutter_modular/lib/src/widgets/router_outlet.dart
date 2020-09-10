@@ -28,11 +28,11 @@ class RouterOutlet extends StatefulWidget {
 class _RouterOutletState extends State<RouterOutlet>
     with AutomaticKeepAliveClientMixin {
   GlobalKey<NavigatorState> _key;
-
   @override
   void initState() {
     super.initState();
-    _key = widget.navigatorKey ?? GlobalKey<NavigatorState>();
+    _key = widget.navigatorKey ??
+        Modular.outletNavigatorKey(widget.module.runtimeType.toString());
   }
 
   @override
